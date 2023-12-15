@@ -1,0 +1,174 @@
+﻿@model Online_Exam.Models.Users
+
+@{
+    ViewBag.Title = "Register";
+    Layout = null;
+}
+
+<style>
+    /* Styles for centering the content */
+    html, body {
+        height: 100%;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #eee; /* Updated background color */
+    }
+
+    /* Styles for the form container */
+    .custom-form-container {
+        width: 450px; /* Adjusted width */
+        padding: 40px;
+        border-radius: 20px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+        background-color: #ffffff;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between; /* Adjusted to space between the elements */
+        font-family: 'Arial', sans-serif; /* Updated font family */
+    }
+
+    /* Styles for form elements */
+    .form-horizontal {
+        margin-top: 20px;
+        width: 100%;
+        max-width: 300px; /* Adjust the max-width as needed */
+    }
+
+    .custom-input {
+        margin-bottom: 20px;
+        width: 100%;
+        font-size: 18px; /* Updated font size */
+        padding: 14px; /* Updated padding */
+        border: 1px solid #bdc3c7; /* Updated border color */
+        border-radius: 8px; /* Added border-radius */
+    }
+
+    .custom-btn {
+        margin-top: 10px;
+        margin-bottom: 10px; /* Adjusted margin-bottom */
+        background-color: #3498db; /* Updated button color */
+        color: #ffffff; /* Updated text color */
+        width: 100%;
+        font-size: 20px; /* Updated font size */
+        padding: 14px; /* Updated padding */
+        border: none; /* Removed border */
+        border-radius: 8px; /* Added border-radius */
+        cursor: pointer; /* Added pointer cursor */
+    }
+
+    /* Styles for the link container */
+    .custom-link-container {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        margin-top: -10px; /* Adjusted margin-top */
+    }
+
+    .custom-link {
+        margin-top: 10px;
+        color: #e74c3c; /* Updated link color */
+        font-size: 16px; /* Updated font size */
+        text-decoration: none; /* Removed underlines */
+        transition: color 0.3s ease; /* Smooth color transition */
+    }
+
+        .custom-link:hover {
+            color: #c0392b; /* Updated link color on hover */
+        }
+
+    /* Updated header styles */
+    h1 {
+        color: #3498db; /* Updated heading color */
+        font-size: 44px; /* Updated font size */
+        margin-bottom: -10px; /* Adjusted margin-bottom */
+    }
+
+    /* Optional: Add more styles as needed */
+</style>
+
+<div class="container custom-form-container">
+    <div class="row justify-content-center">
+        <div class="col-md-6 custom-form">
+            <h1>Register</h1> <!-- Updated heading styles -->
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
+                    <hr />
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            @Html.LabelFor(model => model.U_Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                            @Html.EditorFor(model => model.U_Email, new { htmlAttributes = new { @class = "form-control custom-input mx-auto d-block" } })
+                            @Html.ValidationMessageFor(model => model.U_Email, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            @Html.LabelFor(model => model.U_FullName, htmlAttributes: new { @class = "control-label col-md-2" })
+                            @Html.EditorFor(model => model.U_FullName, new { htmlAttributes = new { @class = "form-control custom-input mx-auto d-block" } })
+                            @Html.ValidationMessageFor(model => model.U_FullName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            @Html.LabelFor(model => model.U_PhoneNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+                            @Html.EditorFor(model => model.U_PhoneNumber, new { htmlAttributes = new { @class = "form-control custom-input mx-auto d-block" } })
+                            @Html.ValidationMessageFor(model => model.U_PhoneNumber, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            @Html.LabelFor(model => model.U_Password, htmlAttributes: new { @class = "control-label col-md-2" })
+                            @Html.PasswordFor(model => model.U_Password, new { @class = "form-control custom-input mx-auto d-block" })
+                            @Html.ValidationMessageFor(model => model.U_Password, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            @Html.LabelFor(model => model.ConfirmPassword, htmlAttributes: new { @class = "control-label col-md-2" })
+                            @Html.PasswordFor(model => model.ConfirmPassword, new { @class = "form-control custom-input mx-auto d-block" })
+                            @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="form-group">
+                            <span class="form-group">
+                                <img height="24" width="24" alt="" class="xz74otr" referrerpolicy="origin-when-cross-origin" src="https://static.xx.fbcdn.net/rsrc.php/v3/yC/r/a6OjkIIE-R0.png">
+                            </span>
+                            <span class="form-group" dir="auto">
+                                <span class="form-group">Photo</span>
+                                <span class="text-danger">@Html.ValidationMessageFor(model => model.U_Photo, "")</span>
+                            </span>
+                        </div>
+                        <div class="form-group" data-visualcompletion="ignore"></div>
+                        <input type="file" asp-for="U_Photo" name="U_Photo" accept="image/*">
+                    </div>
+
+                    <h5 style="color:red">@ViewBag.Message</h5>
+
+                    <div class="form-group">
+                        <div class="col-md-12 text-center">
+                            <input type="submit" value="Register" class="btn btn-danger custom-btn" />
+                        </div>
+                    </div>
+                </div>
+            }
+
+            <div class="custom-link-container">
+                <h6 style="color: black; font-size: 18px; margin-bottom: 5px; margin-top: 10px; margin-right: 10px;">Already have an account?</h6>
+                @Html.ActionLink("Signin", "Signin", new { @class = "custom-link" })
+            </div>
+        </div>
+    </div>
+</div>

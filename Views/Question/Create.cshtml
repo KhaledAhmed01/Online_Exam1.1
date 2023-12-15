@@ -1,0 +1,117 @@
+﻿@model Online_Exam.Models.Questions
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+<style>
+    body {
+        background-color: #f8f9fa;
+    }
+
+    .container {
+        margin-top: 50px;
+    }
+
+    h1 {
+        color: #007bff;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+    }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+
+    .btn-secondary {
+        background-color: #6c757d;
+        border-color: #6c757d;
+    }
+
+        .btn-secondary:hover {
+            background-color: #545b62;
+            border-color: #545b62;
+        }
+</style>
+
+<div class="container">
+    <h1>Create</h1>
+
+    <h4>Questions</h4>
+    <hr />
+
+    <div class="row">
+        <div class="col-md-6">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <!-- Question Title -->
+                <div class="form-group">
+                    <label asp-for="Question_title" class="control-label">Question Title</label>
+                    <input asp-for="Question_title" class="form-control" />
+                    <span asp-validation-for="Question_title" class="text-danger"></span>
+                </div>
+
+                <!-- Question Type Dropdown -->
+                <div class="form-group">
+                    <label asp-for="Question_type" class="control-label">Question Type</label>
+                    <select asp-for="Question_type" class="form-control">
+                        <option value="">Choose Question Type</option>
+                        <option value="MultipleChoice">Multiple Choice</option>
+                        <option value="TrueFalse">True or False</option>
+                        <option value="CheckBox">CheckBox</option>
+                    </select>
+                    <span asp-validation-for="Question_type" class="text-danger"></span>
+                </div>
+
+                <!-- Points -->
+                <div class="form-group">
+                    <label asp-for="Points" class="control-label">Points</label>
+                    <input asp-for="Points" class="form-control" />
+                    <span asp-validation-for="Points" class="text-danger"></span>
+                </div>
+
+                <!-- Is Required Checkbox -->
+                <div class="form-group form-check">
+                    <input class="form-check-input" asp-for="Is_required" />
+                    <label class="form-check-label" for="Is_required">@Html.DisplayNameFor(model => model.Is_required)</label>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Create</button>
+                </div>
+            </form>
+
+            <!-- Finish Exam Button -->
+            <form asp-controller="Exam" asp-action="Finish">
+                <div class="form-group">
+                    <button type="submit" class="btn btn-secondary">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <p>@ViewBag.msg</p>
+
+@*     <div>
+        <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+    </div> *@
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

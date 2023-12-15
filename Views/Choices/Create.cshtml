@@ -1,0 +1,77 @@
+﻿@model Online_Exam.Models.Choices
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    /* Add custom styles here */
+    body {
+        background-color: #f8f9fa;
+    }
+
+    .container {
+        margin-top: 50px;
+    }
+
+    h1 {
+        color: #007bff;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    /* Add more styles as needed */
+</style>
+
+<div class="container">
+    <h1>Create</h1>
+
+    <h4>Choices</h4>
+    <hr />
+
+    <div class="row">
+        <div class="col-md-6">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="form-group">
+                    <label for="Choice_text" class="control-label">
+                        <i class="fas fa-pencil-alt"></i> Choice Text
+                    </label>
+                    <input asp-for="Choice_text" class="form-control" />
+                    <span asp-validation-for="Choice_text" class="text-danger"></span>
+                </div>
+
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="Is_correct" />
+                        @Html.DisplayNameFor(model => model.Is_correct)
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+
+            <form asp-controller="Question" asp-action="Finish">
+                <div class="form-group">
+                    <input type="submit" value="Finish" class="btn btn-success" />
+                </div>
+            </form>
+        </div>
+    </div>
+@* 
+    <div>
+        <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+    </div> *@
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

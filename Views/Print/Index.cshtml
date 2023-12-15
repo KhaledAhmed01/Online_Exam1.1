@@ -1,0 +1,146 @@
+﻿@using Online_Exam.Models;
+@model PrintViewModel
+@{
+    ViewBag.Title = "Index";
+}
+
+<style>
+    body {
+        font-family: 'Cairo', sans-serif;
+        background-color: #eee;
+        text-align: center;
+        margin: 0;
+        padding: 0;
+    }
+
+    .exam-container {
+        max-width: 800px;
+        margin: 0 auto;
+        text-align: left;
+    }
+
+    h1, p, h2, h3 {
+        margin-bottom: 10px;
+    }
+
+    ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    li {
+        margin-bottom: 5px;
+    }
+
+    .question-container {
+        margin-bottom: 20px;
+    }
+
+    .question-card {
+        border: 1px solid #3498db;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 15px;
+        margin-bottom: 20px;
+        background-color: #ddd;
+    }
+
+    .choices-container {
+        background-color: #eee;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        padding: 15px;
+        margin-top: 10px;
+    }
+
+        .choices-container ul {
+            background-color: transparent;
+            padding: 0;
+        }
+
+        .choices-container h2 {
+            margin-top: 0;
+        }
+
+    .radio-label {
+        margin-left: 10px;
+    }
+
+    input[type="radio"] {
+        margin-right: 5px;
+        background-color: #3498db;
+        border: 1px solid #3498db;
+        border-radius: 50%;
+    }
+
+        input[type="radio"]:checked {
+            background-color: #2980b9;
+            border-color: #2980b9;
+        }
+
+    .submit-button-container {
+        text-align: left;
+        margin-top: 20px;
+    }
+
+    .submit-button {
+        background-color: #3498db;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+        .submit-button:hover {
+            background-color: #2980b9;
+        }
+</style>
+
+<div class="exam-container">
+    @foreach (var item in Model.ExamViewModel)
+    {
+        if (item.Exam_id == @ViewBag.mess)
+        {
+            int questionIndex = 1;
+            <div class="question-container">
+                <div class="question-card">
+                    <h1>@item.Exam_title</h1>
+                    <p>@item.Description</p>
+                    <p>Duration: @item.Duration</p>
+
+                    @foreach (var Que in Model.QuestionsViewModel)
+                    {
+                        if (item.Exam_id == Que.Exam_id)
+                        {
+                            int choiceIndex = 1;
+                            <div class="choices-container">
+                                <h2>@questionIndex - @Que.Question_title</h2>
+                                <ul>
+                                    @foreach (var ch in Model.ChoicesViewModel)
+                                    {
+                                        if (Que.Question_id == ch.Question_id)
+                                        {
+                                            <li>
+                                                <input type="radio" id="choice" name="question_@questionIndex" value="@choiceIndex">
+                                                <label class="radio-label" for="choice">@ch.Choice_text</label>
+                                            </li>
+                                            choiceIndex++;
+                                        }
+                                    }
+                                </ul>
+                            </div>
+                            questionIndex++;
+                        }
+                    }
+                </div>
+            </div>
+        }
+    }
+
+    <div class="submit-button-container">
+        <button type="submit" class="submit-button">Submit</button>
+    </div>
+</div>
